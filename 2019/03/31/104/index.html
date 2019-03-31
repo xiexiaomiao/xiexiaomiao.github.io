@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://xiexiaomiao.github.io">
-  <title>algorithm | Xie’s Page</title>
+  <title>二叉树的最大深度 | Xie’s Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="algorithm">
-<meta property="og:url" content="https://xiexiaomiao.github.io/2019/03/29/algorithm/index.html">
+  <meta name="description" content="给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。">
+<meta name="keywords" content="算法,leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树的最大深度">
+<meta property="og:url" content="https://xiexiaomiao.github.io/2019/03/31/104/index.html">
 <meta property="og:site_name" content="Xie’s Page">
+<meta property="og:description" content="给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-29T09:36:12.368Z">
+<meta property="og:updated_time" content="2019-03-31T01:58:44.990Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="algorithm">
+<meta name="twitter:title" content="二叉树的最大深度">
+<meta name="twitter:description" content="给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。">
   
   
     <link rel="icon" href="/img/favicon.ico">
@@ -147,27 +151,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="categories-algorithm" class="article article-type-categories " itemscope itemprop="blogPost">
+            <article id="post-104" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      algorithm
+      二叉树的最大深度
     </h1>
   
 
         
-        <a href="/2019/03/29/algorithm/" class="archive-article-date">
-  	<time datetime="2019-03-29T09:36:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-29</time>
+        <a href="/2019/03/31/104/" class="archive-article-date">
+  	<time datetime="2019-03-31T01:47:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>给定一个二叉树，找出其最大深度。</p>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+<a id="more"></a>
+<p>解法：</p>
+<p>利用递归，树的高度等于左子树的高度加1或右子树的高度加1。叶节点高度为1。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> Math.max(<span class="number">1</span> + maxDepth(root.left), <span class="number">1</span> + maxDepth(root.right));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -175,61 +184,25 @@
     <div class="article-info article-info-index">
       
       
-      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
       
 
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://xiexiaomiao.github.io/2019/03/29/algorithm/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
@@ -239,18 +212,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/29/ML/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/03/31/226/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          ML
+          翻转二叉树
         
       </div>
     </a>
   
   
-    <a href="/2017/03/07/my-first-post/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hello hexo</div>
+    <a href="/2019/03/31/350/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">两个数组的交集II</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -383,6 +356,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

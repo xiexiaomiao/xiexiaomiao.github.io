@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiexiaomiao.github.io/"/>
-  <updated>2019-03-29T09:37:23.868Z</updated>
+  <updated>2019-03-31T02:00:29.301Z</updated>
   <id>https://xiexiaomiao.github.io/</id>
   
   <author>
@@ -15,6 +15,358 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二叉树中的搜索</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/700/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/700/</id>
+    <published>2019-03-31T01:54:25.000Z</published>
+    <updated>2019-03-31T02:00:29.301Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定二叉搜索树（BST）的根节点和一个值。 你需要在BST中找到节点值等于给定值的节点。 返回以该节点为根的子树。 如果节点不存在，则返回 NULL。</p><a id="more"></a><p>例如，</p><p>给定二叉搜索树:<br>         4<br>        / \<br>      2   7<br>     / \<br>    1  3  </p><p>和值: 2</p><p>你应该返回如下子树:<br>       2<br>      / \<br>    1   3  </p><p>解法：</p><p>利用二叉搜索树节点左孩子值小于节点，右孩子节点值大于节点的性质来加快效率。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">searchBST</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (root.val == val) &#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.val &gt; val) &#123; <span class="comment">// 在左子树中查找</span></span><br><span class="line">            <span class="keyword">return</span> searchBST(root.left, val);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// 在右子树中查找</span></span><br><span class="line">            <span class="keyword">return</span> searchBST(root.right, val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给定二叉搜索树（BST）的根节点和一个值。 你需要在BST中找到节点值等于给定值的节点。 返回以该节点为根的子树。 如果节点不存在，则返回 NULL。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>n叉树的前序遍历</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/569/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/569/</id>
+    <published>2019-03-31T01:52:04.000Z</published>
+    <updated>2019-03-31T02:00:09.298Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个 N 叉树，返回其节点值的后序遍历。</p><a id="more"></a><p>解法：</p><p>用栈，先从右开始把孩子存入栈中，之后栈顶元素便是最左边的孩子，弹出栈顶元素并将其孩子入栈。重复直到栈空。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorder</span><span class="params">(Node root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">        Stack&lt;Node&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();  </span><br><span class="line">        stack.push(root);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">            Node cur = stack.pop();</span><br><span class="line">            res.add(cur.val);</span><br><span class="line">            <span class="keyword">if</span> (!cur.children.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = cur.children.size()-<span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                    stack.push(cur.children.get(i));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给定一个 N 叉树，返回其节点值的后序遍历。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>翻转二叉树</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/226/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/226/</id>
+    <published>2019-03-31T01:48:54.000Z</published>
+    <updated>2019-03-31T01:59:22.652Z</updated>
+    
+    <content type="html"><![CDATA[<p>翻转一棵二叉树。</p><a id="more"></a><p>示例：</p><p>输入：<br>      4<br>     /   \<br>   2     7<br>  / \     / \<br>1   3  6  9  </p><p>输出：<br>      4<br>    /    \<br>  7      2<br> /  \    /  \<br>9   6 3   1  </p><p>解法：</p><p>递归。翻转后的二叉树的左子树是右子树的翻转二叉树，右子树是左子树的翻转二叉树。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">invertTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">if</span> (root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        TreeNode left = root.left;</span><br><span class="line">        TreeNode right = root.right;</span><br><span class="line">        </span><br><span class="line">        root.left = invertTree(right);</span><br><span class="line">        root.right = invertTree(left);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;翻转一棵二叉树。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>二叉树的最大深度</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/104/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/104/</id>
+    <published>2019-03-31T01:47:45.000Z</published>
+    <updated>2019-03-31T01:58:44.990Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个二叉树，找出其最大深度。</p><p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p><a id="more"></a><p>解法：</p><p>利用递归，树的高度等于左子树的高度加1或右子树的高度加1。叶节点高度为1。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> Math.max(<span class="number">1</span> + maxDepth(root.left), <span class="number">1</span> + maxDepth(root.right));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给定一个二叉树，找出其最大深度。&lt;/p&gt;
+&lt;p&gt;二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>两个数组的交集II</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/350/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/350/</id>
+    <published>2019-03-31T01:24:05.000Z</published>
+    <updated>2019-03-31T01:59:50.036Z</updated>
+    
+    <content type="html"><![CDATA[<p>和上题一样，只是多了个统计次数。</p><a id="more"></a><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] intersect(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num:nums1) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(num)) &#123;</span><br><span class="line">                map.put(num, map.get(num)+<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                map.put(num, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        List&lt;Integer&gt; nums = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num:nums2) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(num) &amp;&amp; map.get(num) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                map.put(num, map.get(num)-<span class="number">1</span>);</span><br><span class="line">                nums.add(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[nums.size()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            res[i] = nums.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;和上题一样，只是多了个统计次数。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>两个数组的交集</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/349/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/349/</id>
+    <published>2019-03-31T01:11:23.000Z</published>
+    <updated>2019-03-31T01:59:41.479Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定两个数组，编写一个函数来计算它们的交集。</p><a id="more"></a><p>解法：</p><p>没看出来怎么用排序解。用字典存num1的元素，键的值为1。再遍历nums2，键值–，若键值小于1说明该键在nums2中出现了。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] intersection(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt;  map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num:nums1) &#123;</span><br><span class="line">            map.put(num, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        List&lt;Integer&gt; nums = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num:nums2) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(num) &amp;&amp; map.get(num) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                map.put(num, map.get(num)-<span class="number">1</span>);</span><br><span class="line">                nums.add(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[nums.size()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            res[i] = nums.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给定两个数组，编写一个函数来计算它们的交集。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行走机器人</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/874/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/874/</id>
+    <published>2019-03-31T01:09:51.000Z</published>
+    <updated>2019-03-31T02:01:19.516Z</updated>
+    
+    <content type="html"><![CDATA[<p>机器人在一个无限大小的网格上行走，从点 (0, 0) 处开始出发，面向北方。该机器人可以接收以下三种类型的命令：</p><a id="more"></a><ul><li>-2：向左转 90 度</li><li>-1：向右转 90 度</li><li>1 &lt;= x &lt;= 9：向前移动 x 个单位长度<br>在网格上有一些格子被视为障碍物。</li></ul><p>第 i 个障碍物位于网格点  (obstacles[i][0], obstacles[i][1])</p><p>如果机器人试图走到障碍物上方，那么它将停留在障碍物的前一个网格方块上，但仍然可以继续该路线的其余部分。</p><p>返回从原点到机器人的最大欧式距离的平方。</p><p>解法：</p><p>情景模拟，用两个数组dx，dy来控制行走方向，障碍物位置用集合存储来方便查找。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">robotSim</span><span class="params">(<span class="keyword">int</span>[] commands, <span class="keyword">int</span>[][] obstacles)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dx = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] dy = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>, di = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Encode obstacles (x, y) as (x+30000) * (2^16) + (y+30000)</span></span><br><span class="line">        Set&lt;Long&gt; obstacleSet = <span class="keyword">new</span> HashSet();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] obstacle: obstacles) &#123;</span><br><span class="line">            <span class="keyword">long</span> ox = (<span class="keyword">long</span>) obstacle[<span class="number">0</span>] + <span class="number">30000</span>;</span><br><span class="line">            <span class="keyword">long</span> oy = (<span class="keyword">long</span>) obstacle[<span class="number">1</span>] + <span class="number">30000</span>;</span><br><span class="line">            obstacleSet.add((ox &lt;&lt; <span class="number">16</span>) + oy);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> cmd: commands) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cmd == -<span class="number">2</span>)  <span class="comment">//left</span></span><br><span class="line">                di = (di + <span class="number">3</span>) % <span class="number">4</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (cmd == -<span class="number">1</span>)  <span class="comment">//right</span></span><br><span class="line">                di = (di + <span class="number">1</span>) % <span class="number">4</span>;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; cmd; ++k) &#123;</span><br><span class="line">                    <span class="keyword">int</span> nx = x + dx[di];</span><br><span class="line">                    <span class="keyword">int</span> ny = y + dy[di];</span><br><span class="line">                    <span class="keyword">long</span> code = (((<span class="keyword">long</span>) nx + <span class="number">30000</span>) &lt;&lt; <span class="number">16</span>) + ((<span class="keyword">long</span>) ny + <span class="number">30000</span>);</span><br><span class="line">                    <span class="keyword">if</span> (!obstacleSet.contains(code)) &#123;</span><br><span class="line">                        x = nx;</span><br><span class="line">                        y = ny;</span><br><span class="line">                        ans = Math.max(ans, x*x + y*y);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;机器人在一个无限大小的网格上行走，从点 (0, 0) 处开始出发，面向北方。该机器人可以接收以下三种类型的命令：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分发饼干</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/455/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/455/</id>
+    <published>2019-03-31T01:08:49.000Z</published>
+    <updated>2019-03-31T01:59:57.467Z</updated>
+    
+    <content type="html"><![CDATA[<p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。对每个孩子 i ，都有一个胃口值 gi ，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j ，都有一个尺寸 sj 。如果 sj &gt;= gi ，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p><a id="more"></a><p>解法：</p><p>对饼干尺寸进行排序，优先给孩子满足胃口的最小的饼干。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(<span class="keyword">int</span>[] g, <span class="keyword">int</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">boolean</span>[] given = <span class="keyword">new</span> <span class="keyword">boolean</span>[s.length];</span><br><span class="line">        Arrays.sort(s);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s[j] &gt;= g[i] &amp;&amp; !given[j]) &#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    given[j] = <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。对每个孩子 i ，都有一个胃口值 gi ，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j ，都有一个尺寸 sj 。如果 sj &amp;gt;= gi ，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>柠檬水找钱</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/860/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/860/</id>
+    <published>2019-03-31T01:07:45.000Z</published>
+    <updated>2019-03-31T02:00:55.144Z</updated>
+    
+    <content type="html"><![CDATA[<p>在柠檬水摊上，每一杯柠檬水的售价为 5 美元。</p><a id="more"></a><p>顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。</p><p>每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。</p><p>注意，一开始你手头没有任何零钱。</p><p>如果你能给每位顾客正确找零，返回 true ，否则返回 false 。</p><p>解法：</p><p>情景模拟，记录5、10美元的数量，收到20美元优先找10美元，当5美元找完后返回false。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">lemonadeChange</span><span class="params">(<span class="keyword">int</span>[] bills)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> five = <span class="number">0</span>, ten = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> bill: bills) &#123;</span><br><span class="line">            <span class="keyword">if</span> (bill == <span class="number">5</span>)</span><br><span class="line">                five++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (bill == <span class="number">10</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (five == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                five--;</span><br><span class="line">                ten++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (five &gt; <span class="number">0</span> &amp;&amp; ten &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    five--;</span><br><span class="line">                    ten--;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (five &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">                    five -= <span class="number">3</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在柠檬水摊上，每一杯柠檬水的售价为 5 美元。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>买股票的最佳时机II</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/122/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/122/</id>
+    <published>2019-03-31T01:06:20.000Z</published>
+    <updated>2019-03-31T01:58:50.165Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p><p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p><a id="more"></a><p>解法：</p><p>只要当天价格比前一天的高，就把差价给加上。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (prices[i] &gt; prices[i-<span class="number">1</span>]) &#123;</span><br><span class="line">                max += (prices[i] - prices[i-<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。&lt;/p&gt;
+&lt;p&gt;设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>比较含退格的字符串</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/844/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/844/</id>
+    <published>2019-03-31T01:03:05.000Z</published>
+    <updated>2019-03-31T02:00:39.211Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定 S 和 T 两个字符串，当它们分别被输入到空白的文本编辑器后，判断二者是否相等，并返回结果。 # 代表退格字符。</p><a id="more"></a><p>解法：</p><p>遇到“#”便弹栈。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">backspaceCompare</span><span class="params">(String S, String T)</span> </span>&#123;</span><br><span class="line">        Stack&lt;Character&gt; ss = <span class="keyword">new</span> Stack&lt;Character&gt;();</span><br><span class="line">        Stack&lt;Character&gt; ts = <span class="keyword">new</span> Stack&lt;Character&gt;();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; S.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(S.charAt(i) != <span class="string">'#'</span>)</span><br><span class="line">                ss.push(S.charAt(i));      </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(!ss.isEmpty())</span><br><span class="line">                  ss.pop(); </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; T.length(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(T.charAt(i) != <span class="string">'#'</span>)</span><br><span class="line">                ts.push(T.charAt(i)); </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(!ts.isEmpty())</span><br><span class="line">                ts.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ss.equals(ts);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给定 S 和 T 两个字符串，当它们分别被输入到空白的文本编辑器后，判断二者是否相等，并返回结果。 # 代表退格字符。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最小栈</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/155/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/155/</id>
+    <published>2019-03-31T01:01:31.000Z</published>
+    <updated>2019-03-31T01:58:58.032Z</updated>
+    
+    <content type="html"><![CDATA[<p>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。</p><a id="more"></a><ul><li>push(x) – 将元素 x 推入栈中。</li><li>pop() – 删除栈顶的元素。</li><li>top() – 获取栈顶元素。</li><li>getMin() – 检索栈中的最小元素。</li></ul><p>解法：</p><p>用两个栈，一个栈正常操作，另一个栈存储当前最小值。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinStack</span> </span>&#123;</span><br><span class="line">    Stack&lt;Integer&gt; s1;</span><br><span class="line">    Stack&lt;Integer&gt; s2;</span><br><span class="line">    <span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MinStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        s1 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        s2 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        s1.push(x);</span><br><span class="line">        <span class="keyword">if</span> (s2.isEmpty() || x &lt; s2.peek()) &#123;</span><br><span class="line">            s2.push(x);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            s2.push(s2.peek());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        s1.pop();</span><br><span class="line">        s2.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s1.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s2.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用队列实现栈</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/225/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/225/</id>
+    <published>2019-03-31T00:59:28.000Z</published>
+    <updated>2019-03-31T01:59:10.690Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用队列实现栈的下列操作：</p><ul><li>push(x) – 元素 x 入栈  </li><li>pop() – 移除栈顶元素  </li><li>top() – 获取栈顶元素  </li><li>empty() – 返回栈是否为空  </li></ul><a id="more"></a><p>解法：</p><p>用两个队列q1，q2实现，当有新元素要push时，将q2元素进入q1，再进入新元素，再把暂时存储在q1的元素进入q2。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyStack</span> </span>&#123;</span><br><span class="line">    Queue&lt;Integer&gt; q1;</span><br><span class="line">    Queue&lt;Integer&gt; q2;</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        q1 = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        q2 = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Push element x onto stack. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">while</span>(!q2.isEmpty()) &#123;</span><br><span class="line">            q1.offer(q2.poll());</span><br><span class="line">        &#125;</span><br><span class="line">        q2.offer(x);</span><br><span class="line">        <span class="keyword">while</span>(!q1.isEmpty()) &#123;</span><br><span class="line">            q2.offer(q1.poll());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Removes the element on top of the stack and returns that element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> q2.poll();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Get the top element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> q2.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns whether the stack is empty. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">empty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> q2.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用队列实现栈的下列操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;push(x) – 元素 x 入栈  &lt;/li&gt;
+&lt;li&gt;pop() – 移除栈顶元素  &lt;/li&gt;
+&lt;li&gt;top() – 获取栈顶元素  &lt;/li&gt;
+&lt;li&gt;empty() – 返回栈是否为空  &lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用栈实现队列</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/232/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/232/</id>
+    <published>2019-03-31T00:57:46.000Z</published>
+    <updated>2019-03-31T01:59:31.706Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用栈实现队列的下列操作：</p><ul><li>push(x) – 将一个元素放入队列的尾部。</li><li>pop() – 从队列首部移除元素。</li><li>peek() – 返回队列首部的元素。</li><li>empty() – 返回队列是否为空。</li></ul><a id="more"></a><p>解法：</p><p>用两个栈来s1, s2来实现，push时将元素压入s1，pop时若s2不为空，返回s2.pop()，否则将s1的元素全弹入s2，此时s2栈顶元素就是最先加入的元素。peek操作与pop相似。用一个变量size记录队列的元素个数，size等于0时栈为空。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyQueue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> size;</span><br><span class="line">    Stack&lt;Integer&gt; stack1;</span><br><span class="line">    Stack&lt;Integer&gt; stack2;</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">        stack1 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack2 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Push element x to the back of queue. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        stack1.push(x);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Removes the element from in front of queue and returns that element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!stack2.isEmpty()) &#123;</span><br><span class="line">            size--;</span><br><span class="line">            <span class="keyword">return</span> stack2.pop();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (!stack1.isEmpty()) &#123;</span><br><span class="line">                stack2.push(stack1.pop());</span><br><span class="line">            &#125;</span><br><span class="line">            size--;</span><br><span class="line">            <span class="keyword">return</span> stack2.pop(); </span><br><span class="line">        &#125;</span><br><span class="line">               </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Get the front element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (!stack2.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> stack2.peek();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (!stack1.isEmpty()) &#123;</span><br><span class="line">                stack2.push(stack1.pop());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> stack2.peek(); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns whether the queue is empty. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">empty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用栈实现队列的下列操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;push(x) – 将一个元素放入队列的尾部。&lt;/li&gt;
+&lt;li&gt;pop() – 从队列首部移除元素。&lt;/li&gt;
+&lt;li&gt;peek() – 返回队列首部的元素。&lt;/li&gt;
+&lt;li&gt;empty() – 返回队列是否为空。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>棒球比赛</title>
+    <link href="https://xiexiaomiao.github.io/2019/03/31/682/"/>
+    <id>https://xiexiaomiao.github.io/2019/03/31/682/</id>
+    <published>2019-03-31T00:53:22.000Z</published>
+    <updated>2019-03-31T00:55:49.731Z</updated>
+    
+    <content type="html"><![CDATA[<p>你现在是棒球比赛记录员。给定一个字符串列表，每个字符串可以是以下四种类型之一：</p><ul><li><p>整数（一轮的得分）：直接表示您在本轮中获得的积分数。</p></li><li><p>“+”（一轮的得分）：表示本轮获得的得分是前两轮有效 回合得分的总和。</p></li><li><p>“D”（一轮的得分）：表示本轮获得的得分是前一轮有效 回合得分的两倍。</p></li><li><p>“C”（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效 回合的分数是无效的，应该被移除。</p><a id="more"></a></li></ul><p>每一轮的操作都是永久性的，可能会对前一轮和后一轮产生影响。你需要返回你在所有回合中得分的总和。</p><p>解法：</p><p>让我们在处理数据时保持栈上每个有效回合的值。栈是理想的，因为我们只处理涉及最后或倒数第二轮的操作。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calPoints</span><span class="params">(String[] ops)</span> </span>&#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(String op : ops) &#123;</span><br><span class="line">            <span class="keyword">if</span> (op.equals(<span class="string">"+"</span>)) &#123;</span><br><span class="line">                <span class="keyword">int</span> top = stack.pop();</span><br><span class="line">                <span class="keyword">int</span> newtop = top + stack.peek();</span><br><span class="line">                stack.push(top);</span><br><span class="line">                stack.push(newtop);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">"C"</span>)) &#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">"D"</span>)) &#123;</span><br><span class="line">                stack.push(<span class="number">2</span> * stack.peek());</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                stack.push(Integer.valueOf(op));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> score : stack) ans += score;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;你现在是棒球比赛记录员。给定一个字符串列表，每个字符串可以是以下四种类型之一：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;整数（一轮的得分）：直接表示您在本轮中获得的积分数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;“+”（一轮的得分）：表示本轮获得的得分是前两轮有效 回合得分的总和。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;“D”（一轮的得分）：表示本轮获得的得分是前一轮有效 回合得分的两倍。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;“C”（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效 回合的分数是无效的，应该被移除。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>ML</title>
@@ -31,16 +383,69 @@
   </entry>
   
   <entry>
-    <title>algorithm</title>
-    <link href="https://xiexiaomiao.github.io/2019/03/29/algorithm/"/>
-    <id>https://xiexiaomiao.github.io/2019/03/29/algorithm/</id>
-    <published>2019-03-29T09:36:12.000Z</published>
-    <updated>2019-03-29T09:36:12.368Z</updated>
+    <title>删列造序</title>
+    <link href="https://xiexiaomiao.github.io/2018/10/01/944/"/>
+    <id>https://xiexiaomiao.github.io/2018/10/01/944/</id>
+    <published>2018-10-01T01:05:22.000Z</published>
+    <updated>2019-03-31T02:32:27.367Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定由 N 个小写字母字符串组成的数组 A，其中每个字符串长度相等。</p><p>选取一个删除索引序列，对于 A 中的每个字符串，删除对应每个索引处的字符。 所余下的字符串行从上往下读形成列。</p><a id="more"></a><p>比如，有 A = [“abcdef”, “uvwxyz”]，删除索引序列 {0, 2, 3}，删除后 A 为[“bef”, “vyz”]， A 的列分别为[“b”,”v”], [“e”,”y”], [“f”,”z”]。（形式上，第 n 列为 [A[0][n], A[1][n], …, A[A.length-1][n]]）。</p><p>假设，我们选择了一组删除索引 D，那么在执行删除操作之后，A 中所剩余的每一列都必须是 非降序 排列的，然后请你返回 D.length 的最小可能值。</p><p>解法：</p><p>需要把未排序的列全删除。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minDeletionSize</span><span class="params">(String[] A)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A[<span class="number">0</span>].length(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; A.length-<span class="number">1</span>; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (A[j].charAt(i) &gt; A[j+<span class="number">1</span>].charAt(i)) &#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
     
     <summary type="html">
     
+      &lt;p&gt;给定由 N 个小写字母字符串组成的数组 A，其中每个字符串长度相等。&lt;/p&gt;
+&lt;p&gt;选取一个删除索引序列，对于 A 中的每个字符串，删除对应每个索引处的字符。 所余下的字符串行从上往下读形成列。&lt;/p&gt;
+    
     </summary>
     
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有效的括号</title>
+    <link href="https://xiexiaomiao.github.io/2018/09/25/20/"/>
+    <id>https://xiexiaomiao.github.io/2018/09/25/20/</id>
+    <published>2018-09-25T01:04:17.000Z</published>
+    <updated>2019-03-31T02:33:00.218Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p><a id="more"></a><p>解法：</p><p>初始化栈 S。</p><p>依次次处理表达式的每个括号。</p><p>如果遇到开括号，我们只需将其推到栈上即可。这意味着我们将稍后处理它，让我们简单地转到前面的 子表达式。</p><p>如果我们遇到一个闭括号，那么我们检查栈顶的元素。如果栈顶的元素是一个 相同类型的 左括号，那么我们将它从栈中弹出并继续处理。否则，这意味着表达式无效。</p><p>如果到最后我们剩下的栈中仍然有元素，那么这意味着表达式无效。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        Map&lt;Character, Character&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">')'</span>, <span class="string">'('</span>);</span><br><span class="line">        map.put(<span class="string">']'</span>, <span class="string">'['</span>);</span><br><span class="line">        map.put(<span class="string">'&#125;'</span>, <span class="string">'&#123;'</span>);</span><br><span class="line">        </span><br><span class="line">        Stack&lt;Character&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(s.charAt(i))) &#123;</span><br><span class="line">                <span class="keyword">if</span> (stack.isEmpty()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (map.get(s.charAt(i)) != stack.peek()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">else</span> stack.pop();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                stack.push(s.charAt(i));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> stack.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>下一个更大元素I</title>
+    <link href="https://xiexiaomiao.github.io/2018/03/29/496/"/>
+    <id>https://xiexiaomiao.github.io/2018/03/29/496/</id>
+    <published>2018-03-29T09:36:12.000Z</published>
+    <updated>2019-03-31T02:16:39.313Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定两个没有重复元素的数组 nums1 和 nums2，其中 nums1 是 nums2 的子集。找到 nums1 中每个元素在 nums2 中的下一个比其大的值。<br>nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位置的右边的第一个比 x 大的元素。如果不存在，对应位置输出-1。</p><a id="more"></a><p>解法：<br>通过Stack、HashMap解决<br>先遍历大数组nums2，首先将第一个元素入栈；</p><p>继续遍历，当当前元素小于栈顶元素时，继续将它入栈；当当前元素大于栈顶元素时，栈顶元素出栈，此时应将该出栈的元素与当前元素形成key-value键值对，存入HashMap中；</p><p>当遍历完nums2后，得到nums2中元素所对应的下一个更大元素的hash表；</p><p>遍历nums1的元素在hashMap中去查找‘下一个更大元素’，当找不到时则为-1。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] nextGreaterElement(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[nums1.length];</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums2) &#123;</span><br><span class="line">            <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; stack.peek() &lt; num)&#123;</span><br><span class="line">                map.put(stack.pop(), num);</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(num);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">            res[i] = map.getOrDefault(nums1[i], -<span class="number">1</span>);   </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给定两个没有重复元素的数组 nums1 和 nums2，其中 nums1 是 nums2 的子集。找到 nums1 中每个元素在 nums2 中的下一个比其大的值。&lt;br&gt;nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位置的右边的第一个比 x 大的元素。如果不存在，对应位置输出-1。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xiexiaomiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="https://xiexiaomiao.github.io/tags/leetcode/"/>
     
   </entry>
   
